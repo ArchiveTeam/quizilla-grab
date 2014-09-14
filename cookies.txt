@@ -1,0 +1,16 @@
+# Cookies for domains related to teennick.com.
+# This content may be pasted into a cookies.txt file and used by wget
+# Example:  wget -x --load-cookies cookies.txt http://quizilla.teennick.com/
+#
+quizilla.teennick.com	FALSE	/	FALSE	0	quizilla	407f5e6a9a63cb9b39ae05ecc6813b1e
+.quizilla.teennick.com	TRUE	/	FALSE	2177362800	btg_device	m:0,t:0
+.quizilla.teennick.com	TRUE	/	FALSE	1473780706	__utma	166438974.281692615.1410708707.1410708707.1410708707.1
+.quizilla.teennick.com	TRUE	/	FALSE	1410710506	__utmb	166438974
+.quizilla.teennick.com	TRUE	/	FALSE	0	__utmc	166438974
+.quizilla.teennick.com	TRUE	/	FALSE	1426476706	__utmz	166438974.1410708707.1.1.utmccn=(direct)|utmcsr=(direct)|utmcmd=(none)
+.teennick.com	TRUE	/	FALSE	1473780704	__gads	ID=6f5be0557dded6cc:T=1410708704:S=ALNI_MZgGMoVyAKJQZWI0jTF4PVHzNaHhQ
+quizilla.teennick.com	FALSE	/	FALSE	0	vmn_3pc	1
+quizilla.teennick.com	FALSE	/	FALSE	2177362800	vmn_uuid	e93cf964-c258-ab4e-72d5-387085801265
+quizilla.teennick.com	FALSE	/	FALSE	2177362800	mtvn_guid	e93cf964-c258-ab4e-72d5-387085801265
+quizilla.teennick.com	FALSE	/	FALSE	1410795107	NICKEVENTSOverlay	
+.teennick.com	TRUE	/	FALSE	0	s_ppv	53
