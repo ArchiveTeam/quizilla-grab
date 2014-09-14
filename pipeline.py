@@ -201,19 +201,19 @@ class WgetArgs(object):
         assert item_type in ('page')
 
         if item_type == 'page':
-            suffixesa = string.digits
-            suffixesb = string.digits
-            
-            for args in [('http://quizilla.teennick.com/quizzes/{0}{1}{2}'.format(item_value, a, b), \
-                          'http://quizilla.teennick.com/stories/{0}{1}{2}'.format(item_value, a, b), \
-                          'http://quizilla.teennick.com/polls/{0}{1}{2}'.format(item_value, a, b), \
-                          'http://quizilla.teennick.com/poems/{0}{1}{2}'.format(item_value, a, b), \
-                          'http://quizilla.teennick.com/lyrics/{0}{1}{2}'.format(item_value, a, b)) for a,b in suffixesa,suffixesb]:
-                wget_args.append(args[0])
-                wget_args.append(args[1])
-                wget_args.append(args[2])
-                wget_args.append(args[3])
-                wget_args.append(args[4])
+#            suffixesa = string.digits
+#            suffixesb = string.digits
+#            
+#            for args in [('http://quizilla.teennick.com/quizzes/{0}{1}{2}'.format(item_value, a, b), \
+#                          'http://quizilla.teennick.com/stories/{0}{1}{2}'.format(item_value, a, b), \
+#                          'http://quizilla.teennick.com/polls/{0}{1}{2}'.format(item_value, a, b), \
+#                          'http://quizilla.teennick.com/poems/{0}{1}{2}'.format(item_value, a, b), \
+#                          'http://quizilla.teennick.com/lyrics/{0}{1}{2}'.format(item_value, a, b)) for a,b in suffixesa,suffixesb]:
+#                wget_args.append(args[0])
+#                wget_args.append(args[1])
+#                wget_args.append(args[2])
+#                wget_args.append(args[3])
+#                wget_args.append(args[4])
                 
         if 'bind_address' in globals():
             wget_args.extend(['--bind-address', globals()['bind_address']])
@@ -230,11 +230,11 @@ class WgetArgs(object):
 # This will be shown in the warrior management panel. The logo should not
 # be too big. The deadline is optional.
 project = Project(
-    title="Swipnet",
+    title="Quizilla",
     project_html="""
-        <img class="project-logo" alt="Project logo" src="http://archiveteam.org/images/8/81/Frank_sheep_poses.jpg" height="50px" title=""/>
-        <h2>home.swipnet.se <span class="links"><a href="http://home.swipnet.se/">Website</a> &middot; <a href="http://tracker.archiveteam.org/swipnet/">Leaderboard</a></span></h2>
-        <p>Archiving Swedish websites from home.swipnet.se.</p>
+        <img class="project-logo" alt="Project logo" src="http://archiveteam.org/images/5/5a/Quizilla_logo.png" height="50px" title=""/>
+        <h2>quizilla.teennick.com <span class="links"><a href="http://quizilla.teennick.com/">Website</a> &middot; <a href="http://tracker.archiveteam.org/quizilla/">Leaderboard</a></span></h2>
+        <p>Archiving pages from quizilla.teennick.com.</p>
     """,
     utc_deadline=datetime.datetime(2014, 8, 31, 23, 59, 0)
 )
