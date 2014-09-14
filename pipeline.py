@@ -14,6 +14,7 @@ import socket
 import subprocess
 import sys
 import time
+import string
 
 import seesaw
 from seesaw.externalprocess import WgetDownload
@@ -171,8 +172,8 @@ class WgetArgs(object):
             "--output-document", ItemInterpolation("%(item_dir)s/wget.tmp"),
             "--truncate-output",
             "-e", "robots=off",
-            "--no-cookies",
             "--rotate-dns",
+            "--load-cookies", "cookies.txt"
             "--recursive", "--level=inf",
             "--no-parent",
             "--page-requisites",
@@ -196,11 +197,24 @@ class WgetArgs(object):
 
         item['item_type'] = item_type
         item['item_value'] = item_value
+        
+        assert item_type in ('page')
 
-        wget_args.append('http://{0}.swipnet.se/{1}/'.format(item_type, item_value))
-
-        # wget_args.append('http://home.swipnet.se/{0}/'.format(item_name))
-
+        if item_type == 'page':
+            suffixesa = string.digits
+            suffixesb = string.digits
+            
+            for args in [('http://quizilla.teennick.com/quizzes/{0}{1}{2}'.format(item_value, a, b), \
+                          'http://quizilla.teennick.com/stories/{0}{1}{2}'.format(item_value, a, b), \
+                          'http://quizilla.teennick.com/polls/{0}{1}{2}'.format(item_value, a, b), \
+                          'http://quizilla.teennick.com/poems/{0}{1}{2}'.format(item_value, a, b), \
+                          'http://quizilla.teennick.com/lyrics/{0}{1}{2}'.format(item_value, a, b)) for a,b in suffixesa,suffixesb]:
+                wget_args.append(args[0])
+                wget_args.append(args[1])
+                wget_args.append(args[2])
+                wget_args.append(args[3])
+                wget_args.append(args[4])
+                
         if 'bind_address' in globals():
             wget_args.extend(['--bind-address', globals()['bind_address']])
             print('')
