@@ -56,9 +56,9 @@ if not WGET_LUA:
 #
 # Update this each time you make a non-cosmetic change.
 # It will be added to the WARC files and reported to the tracker.
-VERSION = "20140901.01"
+VERSION = "20140914.01"
 USER_AGENT = 'ArchiveTeam'
-TRACKER_ID = 'swipnet'
+TRACKER_ID = 'quizilla'
 TRACKER_HOST = 'tracker.archiveteam.org'
 
 
@@ -145,7 +145,7 @@ def get_hash(filename):
 
 CWD = os.getcwd()
 PIPELINE_SHA1 = get_hash(os.path.join(CWD, 'pipeline.py'))
-LUA_SHA1 = get_hash(os.path.join(CWD, 'swipnet.lua'))
+LUA_SHA1 = get_hash(os.path.join(CWD, 'quizilla.lua'))
 
 
 def stats_id_function(item):
@@ -165,7 +165,7 @@ class WgetArgs(object):
             WGET_LUA,
             "-U", USER_AGENT,
             "-nv",
-            "--lua-script", "swipnet.lua",
+            "--lua-script", "quizilla.lua",
             "-o", ItemInterpolation("%(item_dir)s/wget.log"),
             "--no-check-certificate",
             "--output-document", ItemInterpolation("%(item_dir)s/wget.tmp"),
@@ -180,11 +180,11 @@ class WgetArgs(object):
             "--tries", "inf",
             "--span-hosts",
             "--waitretry", "30",
-            "--domains", "swipnet.se",
+            "--domains", "quizilla.teennick.com",
             "--warc-file", ItemInterpolation("%(item_dir)s/%(warc_file_base)s"),
             "--warc-header", "operator: Archive Team",
-            "--warc-header", "swipnet-dld-script-version: " + VERSION,
-            "--warc-header", ItemInterpolation("swipnet-user: %(item_name)s"),
+            "--warc-header", "quizilla-dld-script-version: " + VERSION,
+            "--warc-header", ItemInterpolation("quizilla-user: %(item_name)s"),
         ]
 
         item_name = item['item_name']
@@ -229,7 +229,7 @@ pipeline = Pipeline(
     CheckIP(),
     GetItemFromTracker("http://%s/%s" % (TRACKER_HOST, TRACKER_ID), downloader,
         VERSION),
-    PrepareDirectories(warc_prefix="swipnet"),
+    PrepareDirectories(warc_prefix="quizilla"),
     WgetDownload(
         WgetArgs(),
         max_tries=2,
