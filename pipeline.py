@@ -201,6 +201,7 @@ class WgetArgs(object):
         assert item_type in ('page')
 
         if item_type == 'page':
+            pass
 #            suffixesa = string.digits
 #            suffixesb = string.digits
 #            
