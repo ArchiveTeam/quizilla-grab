@@ -201,7 +201,7 @@ class WgetArgs(object):
         assert item_type in ('page')
 
         if item_type == 'page':
-            wget_args.append('http//quizilla.teennick.com/')
+            wget_args.append('http://quizilla.teennick.com/')
 #            suffixesa = string.digits
 #            suffixesb = string.digits
 #            
