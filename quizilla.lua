@@ -33,16 +33,8 @@ local downloaded = {}
 wget.callbacks.get_urls = function(file, url, is_css, iri)
   local urls = {}
   
-  if item_type == "page" then
-    if string.match(url, item_type) then
-      return verdict
-    elseif string.match(url, "/templates/")
-      or string.match(url, "/media/)")
-      or string.match(url, "cdn%.gigya%.com")
-      or string.match(url, "/static/") then
-      return true
-    else
-      return false
+  
+  
   return urls
 end
 
@@ -55,7 +47,27 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
   if downloaded[url] == true then
     return false
   end
-
+  
+  if item_type == "page" then
+    if string.match(url, item_type) then
+      return verdict
+    elseif string.match(url, "/templates/")
+      or string.match(url, "/media/)")
+      or string.match(url, "cdn%.gigya%.com")
+      or string.match(url, "/static/") then
+      return true
+    elseif string.match(url, "/tags/") then
+      if string.match(parenturl, item_type) then
+        return verdict
+      else
+        return false
+      end
+    else
+      return false
+    end
+  else
+    return false
+  end
   
 end
 
