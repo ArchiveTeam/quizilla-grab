@@ -60,7 +60,7 @@ if not WGET_LUA:
 VERSION = "20140914.01"
 USER_AGENT = 'ArchiveTeam'
 TRACKER_ID = 'quizilla'
-TRACKER_HOST = 'localhost:9080'
+TRACKER_HOST = 'tracker.archiveteam.org'
 
 
 ###########################################################################
