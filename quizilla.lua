@@ -50,6 +50,11 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           table.insert(urls, { url=swfurl })
         end
       end
+      for swfurlb in string.gmatch(html, '<embed src="(http://www.quizilla.teennick.com/[^"]+)"') do
+        if downloaded[swfurlb] ~= true then
+          table.insert(urls, { url=swfurlb })
+        end
+      end
       
     end
   end
