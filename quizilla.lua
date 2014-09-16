@@ -56,6 +56,11 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           table.insert(urls, { url=swfurlb })
         end
       end
+      for pageurl in string.gmatch(html, '"(http:/[^/]+/[^/]+/'..item_type..'/[^"]+)"') do
+        if downloaded[pageurl] ~= true then
+          table.insert(urls, { url=pageurl })
+        end
+      end
       for userurl in string.gmatch(html, '<[^>]+>[^<]+<[^>]+>[^<]+<[^>]+>[^<]+<[^"]+"(/user/[^"]+)"') do
         local user = string.match(userurl, "/[^/]+/([^/]+)/")
         if story_creator ~= user then
