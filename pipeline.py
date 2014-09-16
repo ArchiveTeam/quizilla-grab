@@ -201,20 +201,20 @@ class WgetArgs(object):
         assert item_type in ('page')
 
         if item_type == 'page':
-            wget_args.append('http://quizilla.teennick.com/')
-#            suffixesa = string.digits
-#            suffixesb = string.digits
-#            
-#            for args in [('http://quizilla.teennick.com/quizzes/{0}{1}{2}'.format(item_value, a, b), \
-#                          'http://quizilla.teennick.com/stories/{0}{1}{2}'.format(item_value, a, b), \
-#                          'http://quizilla.teennick.com/polls/{0}{1}{2}'.format(item_value, a, b), \
-#                          'http://quizilla.teennick.com/poems/{0}{1}{2}'.format(item_value, a, b), \
-#                          'http://quizilla.teennick.com/lyrics/{0}{1}{2}'.format(item_value, a, b)) for a,b in suffixesa,suffixesb]:
-#                wget_args.append(args[0])
-#                wget_args.append(args[1])
-#                wget_args.append(args[2])
-#                wget_args.append(args[3])
-#                wget_args.append(args[4])
+#            wget_args.append('http://quizilla.teennick.com/')
+            suffixesa = string.digits
+            suffixesb = string.digits
+            
+            for args in [('http://quizilla.teennick.com/quizzes/{0}{1}{2}'.format(item_value, a, b), \
+                          'http://quizilla.teennick.com/stories/{0}{1}{2}'.format(item_value, a, b), \
+                          'http://quizilla.teennick.com/polls/{0}{1}{2}'.format(item_value, a, b), \
+                          'http://quizilla.teennick.com/poems/{0}{1}{2}'.format(item_value, a, b), \
+                          'http://quizilla.teennick.com/lyrics/{0}{1}{2}'.format(item_value, a, b)) for a,b in suffixesa,suffixesb]:
+                wget_args.append(args[0])
+                wget_args.append(args[1])
+                wget_args.append(args[2])
+                wget_args.append(args[3])
+                wget_args.append(args[4])
                 
         if 'bind_address' in globals():
             wget_args.extend(['--bind-address', globals()['bind_address']])
