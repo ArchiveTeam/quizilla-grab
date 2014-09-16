@@ -58,9 +58,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       end
       for pageurl in string.gmatch(html, '"(http://[^/]+/[^/]+/[0-9]+/[^"]+)"') do
         if string.match(pageurl, item_value) then
-          if downloaded[pageurl] ~= true then
             table.insert(urls, { url=pageurl })
-          end
         end
       end
       for userurl in string.gmatch(html, '<[^>]+>[^<]+<[^>]+>[^<]+<[^>]+>[^<]+<[^"]+"(/user/[^"]+)"') do
@@ -68,7 +66,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         if story_creator ~= user then
           story_creator = user
           local baseurl = "http://quizilla.teennick.com"
-          local fullurl
+          local fullurl = baseurl..userurl
           if downloaded[fullurl] ~= true then
             table.insert(urls, { url=fullurl })
           end
