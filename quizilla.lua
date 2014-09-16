@@ -1,5 +1,6 @@
 local url_count = 0
 local tries = 0
+local story_creator = none
 local item_type = os.getenv('item_type')
 local item_value = os.getenv('item_value')
 dofile("urlcode.lua")
@@ -38,24 +39,36 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       if not html then
         html = read_file(file)
       end
-      for adurl in string.gmatch(html, '(/templates/QZ2/ad.html[^"]+)' do
+      for adurl in string.gmatch(html, '(/templates/QZ2/ad%.html[^"]+)' do
         local baseurl = "http://quizilla.teennick.com"
         local fulladurl = baseurl..adurl
         if downloaded[fulladurl] ~= true then
           table.insert(urls, { url=fulladurl })
         end
       end
-      for swfurl in string.gmatch(html, '<param name="movie"[^"]+"(http://www.quizilla.teennick.com/[^"]+)"') do
+      for swfurl in string.gmatch(html, '<param name="movie"[^"]+"(http://www%.quizilla%.teennick%.com/[^"]+)"') do
         if downloaded[swfurl] ~= true then
           table.insert(urls, { url=swfurl })
         end
       end
-      for swfurlb in string.gmatch(html, '<embed src="(http://www.quizilla.teennick.com/[^"]+)"') do
+      for swfurlb in string.gmatch(html, '<embed src="(http://www%.quizilla%.teennick%.com/[^"]+)"') do
         if downloaded[swfurlb] ~= true then
           table.insert(urls, { url=swfurlb })
         end
       end
+      for userurl in string.gmatch(html, '<[^>]+>[^<]+<[^>]+>[^<]+<[^>]+>[^<]+<[^"]+"(/user/[^"]+)"') do
+        local user = string.match(userurl, "/[^/]+/([^/]+)/")
+        if story_creator ~= user then
+          story_creator = user
+          local baseurl = "http://quizilla.teennick.com"
+          local fullurl
+          if downloaded[fullurl] ~= true then
+            table.insert(urls, { url=fullurl })
+          end
+        end
+      end
       
+        
     end
   end
   
@@ -85,6 +98,10 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
         return verdict
       else
         return false
+      end
+    elseif string.match(url, "/user/") then
+      if string.match(url, story_creator) then
+        return true
       end
     else
       return false
