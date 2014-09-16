@@ -33,7 +33,26 @@ local downloaded = {}
 wget.callbacks.get_urls = function(file, url, is_css, iri)
   local urls = {}
   
-  
+  if item_type == "page" then
+    if string.match(url, item_type) then
+      if not html then
+        html = read_file(file)
+      end
+      for adurl in string.gmatch(html, '(/templates/QZ2/ad.html[^"]+)' do
+        local baseurl = "http://quizilla.teennick.com"
+        local fulladurl = baseurl..adurl
+        if downloaded[fulladurl] ~= true then
+          table.insert(urls, { url=fulladurl })
+        end
+      end
+      for swfurl in string.gmatch(html, '<param name="movie"[^"]+"(http://www.quizilla.teennick.com/[^"]+)"') do
+        if downloaded[swfurl] ~= true then
+          table.insert(urls, { url=swfurl })
+        end
+      end
+      
+    end
+  end
   
   return urls
 end
