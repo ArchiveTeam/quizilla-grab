@@ -39,7 +39,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       if not html then
         html = read_file(file)
       end
-      for adurl in string.gmatch(html, '(/templates/QZ2/ad%.html[^"]+)' do
+      for adurl in string.gmatch(html, '(/templates/QZ2/ad%.html[^"]+)') do
         local baseurl = "http://quizilla.teennick.com"
         local fulladurl = baseurl..adurl
         if downloaded[fulladurl] ~= true then
