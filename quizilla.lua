@@ -35,7 +35,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
   local urls = {}
   
   if item_type == "page" then
-    if string.match(url, item_type) then
+    if string.match(url, item_value) then
       if not html then
         html = read_file(file)
       end
@@ -57,7 +57,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         end
       end
       for pageurl in string.gmatch(html, '"(http://[^/]+/[^/]+/[0-9]+/[^"]+)"') do
-        if string.match(pageurl, item_type) then
+        if string.match(pageurl, item_value) then
           if downloaded[pageurl] ~= true then
             table.insert(urls, { url=pageurl })
           end
@@ -93,7 +93,7 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
   end
   
   if item_type == "page" then
-    if string.match(url, item_type) then
+    if string.match(url, item_value) then
       return true
     elseif string.match(url, "/templates/")
       or string.match(url, "/media/)")
@@ -101,7 +101,7 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
       or string.match(url, "/static/") then
       return true
     elseif string.match(url, "/tags/") then
-      if string.match(parenturl, item_type) then
+      if string.match(parenturl, item_value) then
         return true
       else
         return false
