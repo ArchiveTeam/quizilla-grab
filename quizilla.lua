@@ -1,6 +1,5 @@
 local url_count = 0
 local tries = 0
-local story_creator = none
 local item_type = os.getenv('item_type')
 local item_value = os.getenv('item_value')
 dofile("urlcode.lua")
@@ -61,18 +60,6 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
             table.insert(urls, { url=pageurl })
         end
       end
-      for userurl in string.gmatch(html, '<[^>]+>[^<]+<[^>]+>[^<]+<[^>]+>[^<]+<[^"]+"(/user/[^"]+)"') do
-        local user = string.match(userurl, "/[^/]+/([^/]+)/")
-        if story_creator ~= user then
-          story_creator = user
-          local baseurl = "http://quizilla.teennick.com"
-          local fullurl = baseurl..userurl
-          if downloaded[fullurl] ~= true then
-            table.insert(urls, { url=fullurl })
-          end
-        end
-      end
-      
         
     end
   end
