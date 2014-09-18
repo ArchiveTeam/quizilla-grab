@@ -2,4 +2,4 @@
 # This content may be pasted into a cookies.txt file and used by wget
 # Example:  wget -x --load-cookies cookies.txt http://quizilla.teennick.com/
 #
-quizilla.teennick.com	FALSE	/	FALSE	1410795107	NICKEVENTSOverlay	
+quizilla.teennick.com	FALSE	/	FALSE	1411140960	NICKEVENTSOverlay
