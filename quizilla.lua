@@ -81,7 +81,7 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
     if string.match(url, item_value) then
       return true
     elseif string.match(url, "/templates/")
-      or string.match(url, "/media/)")
+      or string.match(url, "/media/")
       or string.match(url, "cdn%.gigya%.com")
       or string.match(url, "/static/") then
       return true
