@@ -63,7 +63,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           end
         end
       end
-      if string.match(html, 
+--      if string.match(html, 
         
     end
   end
