@@ -198,7 +198,7 @@ class WgetArgs(object):
         item['item_type'] = item_type
         item['item_value'] = item_value
         
-        assert item_type in ('page')
+        assert item_type in ('page', 'user')
 
         if item_type == 'page':
 #            wget_args.append('http://quizilla.teennick.com/')
@@ -215,7 +215,10 @@ class WgetArgs(object):
                 wget_args.append(args[2])
                 wget_args.append(args[3])
                 wget_args.append(args[4])
-                
+        
+        elif item_type == 'user':
+            wget_args.append('http://quizilla.teennick.com/user/{0}'.format(item_value))
+            
         if 'bind_address' in globals():
             wget_args.extend(['--bind-address', globals()['bind_address']])
             print('')
