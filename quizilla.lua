@@ -59,7 +59,20 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       for pageurl in string.gmatch(html, '<p class="sharelink">[^h]+(http://[^/]+/[^/]+/[0-9]+/[^<]+)</p>') do
         table.insert(urls, { url=pageurl })
       end
---      if string.match(html, 
+      if string.match(url, "/quizzes/") then
+        local urlid = string.match(url, "http://[^/]+/[^/]+/([0-9]+)")
+        if string.match(html, '<input id="a_[0-9]+" type="[^"]+" name="answers%[[0-9]+%]" value="[0-9]+" />') then
+          local input_id = string.match(html, '<input id="a_[0-9]+" type="[^"]+" name="answers%[[0-9]+%]" value="([0-9]+)" />')
+          local input_id_name = string.match(html, '<input id="a_[0-9]+" type="[^"]+" name="(answers%[[0-9]+%])" value="[0-9]+" />')
+          local quiz_id = string.match(html, 'name="quiz_id" value="([0-9]+)">')
+          local quiz_title = string.match(html, 'name="quiz_title" value="([^"]+)">')
+          if post_requests[quiz_id] ~= true then
+            table.insert(urls, { url="http://quizilla.teennick.com/quizzes?task=submit",
+                                 post_data=(input_id_name.."="..input_id.."&quiz_id="..quiz_id.."&quiz_title="..quiz_title) })
+            post_requests[quiz_id] = true
+          end
+        end
+      end
         
     end
   end
