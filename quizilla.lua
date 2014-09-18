@@ -72,7 +72,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           end
         end
       end
-      if string.match(url, "http://[^/]+/quizzes/result/[0-9]+/[0-9]+" then
+      if string.match(url, "http://[^/]+/quizzes/result/[0-9]+/[0-9]+") then
         local result_id = string.match(url, "http://[^/]+/quizzes/result/[0-9]+/([0-9]+)")
         local result_base = string.match(url, "(http://[^/]+/quizzes/result/[0-9]+/)[0-9]+")
         local quiz_id = string.match(url, "http://[^/]+/quizzes/result/([0-9]+)/[0-9]+")
