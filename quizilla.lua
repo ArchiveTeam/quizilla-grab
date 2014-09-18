@@ -160,7 +160,7 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
   end
   
   if item_type == "page" then
-    if string.match(url, "/"..item_value) then
+    if string.match(url, item_value) then
       return true
     elseif string.match(url, "/templates/")
       or string.match(url, "/media/")
@@ -188,7 +188,7 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
       return false
     end
   elseif item_type == "tag" then
-    if string.match(url, item_value) then
+    if string.match(url, "/tags/"..item_value) then
       return true
     elseif string.match(url, "/templates/")
       or string.match(url, "/media/")
