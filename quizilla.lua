@@ -29,6 +29,7 @@ read_file = function(file)
 end
 
 local downloaded = {}
+local post_requests = {}
 
 wget.callbacks.get_urls = function(file, url, is_css, iri)
   local urls = {}
@@ -55,11 +56,14 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           table.insert(urls, { url=swfurlb })
         end
       end
-      for pageurl in string.gmatch(html, '"(http://[^/]+/[^/]+/[0-9]+/[^"]+)"') do
+      for pageurl in string.gmatch(html, '"(http://[^/]+/[^/]+/[0-9]+/[^"]+)') do
         if string.match(pageurl, item_value) then
+          if downloaded[pageurl] ~= true then
             table.insert(urls, { url=pageurl })
+          end
         end
       end
+      if string.match(html, 
         
     end
   end
