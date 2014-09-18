@@ -55,7 +55,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           table.insert(urls, { url=swfurlb })
         end
       end
-      for pageurl in string.gmatch(html, 'mailto:[^=]+=(http[^"]+)">') do
+      for pageurl in string.gmatch(html, 'mailto:[^=]+=[^=]+=(http[^"]+)">') do
         local pageurlprocessed = string.gsub(pageurl, "www%.quizilla%.teenninck%.com", "quizilla%.teennick%.com")
         table.insert(urls, { url=pageurlprocessed })
       end
