@@ -56,11 +56,9 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           table.insert(urls, { url=swfurlb })
         end
       end
-      for pageurl in string.gmatch(html, '"(http://[^/]+/[^/]+/[0-9]+/[^"]+)') do
-        if string.match(pageurl, item_value) then
-          if downloaded[pageurl] ~= true then
-            table.insert(urls, { url=pageurl })
-          end
+      for pageurl in string.gmatch(html, '<p class="sharelink">[^h]+(http://[^/]+/[^/]+/[0-9]+/[^<]+)</p>') do
+        if downloaded[pageurl] ~= true then
+          table.insert(urls, { url=pageurl })
         end
       end
 --      if string.match(html, 
