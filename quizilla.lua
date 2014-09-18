@@ -58,7 +58,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       for pageurl in string.gmatch(html, '<p class="sharelink">[^h]+(http://[^/]+/[^/]+/[0-9]+/[^<]+)</p>') do
         table.insert(urls, { url=pageurl })
       end
-      if string.match(url, "/quizzes/") then
+      if (string.match(url, "/quizzes/") and status_code_global == 200) then
         local urlid = string.match(url, "http://[^/]+/[^/]+/([0-9]+)")
         if string.match(html, '<input id="a_[0-9]+" type="[^"]+" name="answers%[[0-9]+%]" value="[0-9]+" />') then
           local input_id = string.match(html, '<input id="a_[0-9]+" type="[^"]+" name="answers%[[0-9]+%]" value="([0-9]+)" />')
@@ -167,6 +167,7 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
   -- NEW for 2014: Slightly more verbose messages because people keep
   -- complaining that it's not moving or not working
   local status_code = http_stat["statcode"]
+  status_code_global = status_code
   
   url_count = url_count + 1
   io.stdout:write(url_count .. "=" .. status_code .. " " .. url["url"] .. ".  \n")
