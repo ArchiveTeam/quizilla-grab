@@ -237,7 +237,7 @@ project = Project(
         <h2>quizilla.teennick.com <span class="links"><a href="http://quizilla.teennick.com/">Website</a> &middot; <a href="http://tracker.archiveteam.org/quizilla/">Leaderboard</a></span></h2>
         <p>Archiving pages from quizilla.teennick.com.</p>
     """,
-    utc_deadline=datetime.datetime(2014, 8, 31, 23, 59, 0)
+    utc_deadline=datetime.datetime(2014, 10, 1, 23, 59, 0)
 )
 
 pipeline = Pipeline(
