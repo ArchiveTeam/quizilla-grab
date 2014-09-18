@@ -30,15 +30,14 @@ end
 
 local downloaded = {}
 local post_requests = {}
+local results = {}
 
 wget.callbacks.get_urls = function(file, url, is_css, iri)
   local urls = {}
   
   if item_type == "page" then
     if string.match(url, item_value) then
-      if not html then
-        html = read_file(file)
-      end
+      html = read_file(file)
       for adurl in string.gmatch(html, '(/templates/QZ2/ad%.html[^"]+)') do
         local baseurl = "http://quizilla.teennick.com"
         local fulladurl = baseurl..adurl
@@ -73,7 +72,54 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           end
         end
       end
-        
+      if (string.match(url, "http://[^/]+/quizzes/result/[0-9]+/[0-9]+") then
+        local result_id = string.match(url, "http://[^/]+/quizzes/result/[0-9]+/([0-9]+)")
+        local result_base = string.match(url, "(http://[^/]+/quizzes/result/[0-9]+/)[0-9]+")
+        local quiz_id = string.match(url, "http://[^/]+/quizzes/result/([0-9]+)/[0-9]+")
+        if results[quiz_id] ~= true then
+          local result_id_plus_1 = result_id + 1
+          local result_id_plus_2 = result_id + 2
+          local result_id_plus_3 = result_id + 3
+          local result_id_plus_4 = result_id + 4
+          local result_id_plus_5 = result_id + 5
+          local result_id_plus_6 = result_id + 6
+          local result_id_plus_7 = result_id + 7
+          local result_id_plus_8 = result_id + 8
+          local result_id_plus_9 = result_id + 9
+          local result_id_plus_10 = result_id + 10
+          local result_id_minus_1 = result_id - 1
+          local result_id_minus_2 = result_id - 2
+          local result_id_minus_3 = result_id - 3
+          local result_id_minus_4 = result_id - 4
+          local result_id_minus_5 = result_id - 5
+          local result_id_minus_6 = result_id - 6
+          local result_id_minus_7 = result_id - 7
+          local result_id_minus_8 = result_id - 8
+          local result_id_minus_9 = result_id - 9
+          local result_id_minus_10 = result_id - 10
+          table.insert(urls, { url=result_id_plus_1 })
+          table.insert(urls, { url=result_id_plus_2 })
+          table.insert(urls, { url=result_id_plus_3 })
+          table.insert(urls, { url=result_id_plus_4 })
+          table.insert(urls, { url=result_id_plus_5 })
+          table.insert(urls, { url=result_id_plus_6 })
+          table.insert(urls, { url=result_id_plus_7 })
+          table.insert(urls, { url=result_id_plus_8 })
+          table.insert(urls, { url=result_id_plus_9 })
+          table.insert(urls, { url=result_id_plus_10 })
+          table.insert(urls, { url=result_id_minus_1 })
+          table.insert(urls, { url=result_id_minus_2 })
+          table.insert(urls, { url=result_id_minus_3 })
+          table.insert(urls, { url=result_id_minus_4 })
+          table.insert(urls, { url=result_id_minus_5 })
+          table.insert(urls, { url=result_id_minus_6 })
+          table.insert(urls, { url=result_id_minus_7 })
+          table.insert(urls, { url=result_id_minus_8 })
+          table.insert(urls, { url=result_id_minus_9 })
+          table.insert(urls, { url=result_id_minus_10 })
+          results[quiz_id] = true
+        end
+      end
     end
   end
   
