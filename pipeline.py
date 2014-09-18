@@ -173,7 +173,7 @@ class WgetArgs(object):
             "--truncate-output",
             "-e", "robots=off",
             "--rotate-dns",
-            "--load-cookies", "cookies.txt"
+            "--load-cookies", "cookies.txt",
             "--recursive", "--level=inf",
             "--no-parent",
             "--page-requisites",
