@@ -67,7 +67,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           local quiz_title = string.match(html, 'name="quiz_title" value="([^"]+)">')
           if post_requests[quiz_id] ~= true then
             table.insert(urls, { url="http://quizilla.teennick.com/quizzes?task=submit",
-                                 post_data=(string.gsub(string.gsub(input_id_name, "%[", "%%5B"), "%]", "%%5D")).."="..input_id.."&quiz_id="..quiz_id.."&quiz_title="..quiz_title) })
+                                 post_data=(string.gsub(string.gsub(input_id_name, "%[", "%%5B"), "%]", "%%5D").."="..input_id.."&quiz_id="..quiz_id.."&quiz_title="..quiz_title) })
             post_requests[quiz_id] = true
           end
         end
