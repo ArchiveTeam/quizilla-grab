@@ -56,7 +56,8 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         end
       end
       for pageurl in string.gmatch(html, '<p class="sharelink">[^h]+(http://[^/]+/[^/]+/[0-9]+/[^<]+)</p>') do
-        table.insert(urls, { url=pageurl })
+        local pageurlprocessed = string.gsub(pageurl, "www%.quizilla%.teenninck%.com", "quizilla%.teennick%.com")
+        table.insert(urls, { url=pageurlprocessed })
       end
       if (string.match(url, "/quizzes/") and status_code_global == 200) then
         local urlid = string.match(url, "http://[^/]+/[^/]+/([0-9]+)")
