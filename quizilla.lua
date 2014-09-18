@@ -122,6 +122,28 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         end
       end
     end
+  elseif item_type == "user" then
+    if string.match(url, item_value) then
+      html = read_file(file)
+      for adurl in string.gmatch(html, '(/templates/QZ2/ad%.html[^"]+)') do
+        local baseurl = "http://quizilla.teennick.com"
+        local fulladurl = baseurl..adurl
+        if downloaded[fulladurl] ~= true then
+          table.insert(urls, { url=fulladurl })
+        end
+      end
+    end
+  elseif item_type == "tag" then
+    if string.match(url, item_value) then
+      html = read_file(file)
+      for adurl in string.gmatch(html, '(/templates/QZ2/ad%.html[^"]+)') do
+        local baseurl = "http://quizilla.teennick.com"
+        local fulladurl = baseurl..adurl
+        if downloaded[fulladurl] ~= true then
+          table.insert(urls, { url=fulladurl })
+        end
+      end
+    end
   end
   
   return urls
@@ -142,19 +164,40 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
       return true
     elseif string.match(url, "/templates/")
       or string.match(url, "/media/")
+      or string.match(url, "/data/")
+      or string.match(url, "/nick%-assets/")
       or string.match(url, "cdn%.gigya%.com")
+      or string.match(url, "/user_images/")
       or string.match(url, "/static/") then
       return true
-    elseif string.match(url, "/tags/") then
-      if string.match(parenturl, item_value) then
-        return true
-      else
-        return false
-      end
-    elseif string.match(url, "/user/") then
-      if string.match(url, story_creator) then
-        return true
-      end
+    else
+      return false
+    end
+  elseif item_type == "user" then
+    if string.match(url, item_value) then
+      return true
+    elseif string.match(url, "/templates/")
+      or string.match(url, "/media/")
+      or string.match(url, "/data/")
+      or string.match(url, "/nick%-assets/")
+      or string.match(url, "cdn%.gigya%.com")
+      or string.match(url, "/user_images/")
+      or string.match(url, "/static/") then
+      return true
+    else
+      return false
+    end
+  elseif item_type == "tag" then
+    if string.match(url, item_value) then
+      return true
+    elseif string.match(url, "/templates/")
+      or string.match(url, "/media/")
+      or string.match(url, "/data/")
+      or string.match(url, "/nick%-assets/")
+      or string.match(url, "cdn%.gigya%.com")
+      or string.match(url, "/user_images/")
+      or string.match(url, "/static/") then
+      return true
     else
       return false
     end
