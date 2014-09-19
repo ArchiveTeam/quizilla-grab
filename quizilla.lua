@@ -29,9 +29,6 @@ read_file = function(file)
 end
 
 local downloaded = {}
-local downloaded4041 = {}
-local downloaded4042 = {}
-local downloaded4043 = {}
 local post_requests = {}
 local results = {}
 
@@ -309,14 +306,6 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
 
   if status_code >= 200 and status_code <= 399 then
     downloaded[url.url] = true
-  elseif status_code == 404 and downloaded4043[url.url] == true then
-    downloaded[url.url] = true
-  elseif status_code == 404 and downloaded4041[url.url] ~= true then
-    downloaded4041[url.url] = true
-  elseif status_code == 404 and downloaded4041[url.url] == true then
-    downloaded4042[url.url] = true
-  elseif status_code == 404 and downloaded4042[url.url] == true then
-    downloaded4043[url.url] = true
   end
   
   if status_code >= 500 or
