@@ -205,11 +205,11 @@ class WgetArgs(object):
             suffixesa = string.digits
             suffixesb = string.digits
             
-            for args in [('http://quizilla.teennick.com/quizzes/{0}{1}'.format(item_value, a), \
-                          'http://quizilla.teennick.com/stories/{0}{1}'.format(item_value, a), \
-                          'http://quizilla.teennick.com/polls/{0}{1}'.format(item_value, a), \
-                          'http://quizilla.teennick.com/poems/{0}{1}'.format(item_value, a), \
-                          'http://quizilla.teennick.com/lyrics/{0}{1}'.format(item_value, a)) for a in suffixesa]:
+            for args in [('http://quizilla.teennick.com/quizzes/{0}{1}{2}'.format(item_value, a, b), \
+                          'http://quizilla.teennick.com/stories/{0}{1}{2}'.format(item_value, a, b), \
+                          'http://quizilla.teennick.com/polls/{0}{1}{2}'.format(item_value, a, b), \
+                          'http://quizilla.teennick.com/poems/{0}{1}{2}'.format(item_value, a, b), \
+                          'http://quizilla.teennick.com/lyrics/{0}{1}{2}'.format(item_value, a, b)) for a in suffixesa for b in suffixesb]:
                 wget_args.append(args[0])
                 wget_args.append(args[1])
                 wget_args.append(args[2])
