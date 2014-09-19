@@ -140,9 +140,11 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         end
       end
       for userurl2 in string.gmatch(html, '/user/[^"]+') do
-        if string.match(userurl2, "/user/"..item_value) then
-          if downloaded[userurl2] ~= true then
-            table.insert(urls, { url=userurl2 })
+        local baseurl = "http://quizilla.teennick.com"
+        local fulluserurl2 = baseurl..userurl2
+        if string.match(fulluserurl2, "/user/"..item_value) then
+          if downloaded[fulluserurl2] ~= true then
+            table.insert(urls, { url=fulluserurl2 })
           end
         end
       end
