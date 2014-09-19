@@ -132,6 +132,20 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           table.insert(urls, { url=fulladurl })
         end
       end
+      for userurl in string.gmatch(html, '"(http[s]?://[^"]+)') do
+        if string.match(userurl, "/user/"..item_value) then
+          if downloaded[userurl] ~= true then
+            table.insert(urls, { url=userurl })
+          end
+        end
+      end
+      for userurl2 in string.gmatch(html, '/user/[^"]+') do
+        if string.match(userurl2, "/user/"..item_value) then
+          if downloaded[userurl2] ~= true then
+            table.insert(urls, { url=userurl2 })
+          end
+        end
+      end
     end
   elseif item_type == "tag" then
     if string.match(url, item_value) then
