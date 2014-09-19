@@ -134,13 +134,13 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       end
       for userurl in string.gmatch(html, '"(http[s]?://[^"]+)') do
         if string.match(userurl, "/user/"..item_value)
-          or string.match(url, "/templates/")
-          or string.match(url, "/media/")
-          or string.match(url, "/data/")
-          or string.match(url, "/nick%-assets/")
-          or string.match(url, "cdn%.gigya%.com")
-          or string.match(url, "/user_images/")
-          or string.match(url, "/static/") then
+          or string.match(userurl, "/templates/")
+          or string.match(userurl, "/media/")
+          or string.match(userurl, "/data/")
+          or string.match(userurl, "/nick%-assets/")
+          or string.match(userurl, "cdn%.gigya%.com")
+          or string.match(userurl, "/user_images/")
+          or string.match(userurl, "/static/") then
           if downloaded[userurl] ~= true then
             table.insert(urls, { url=userurl })
           end
@@ -150,13 +150,13 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         local baseurl = "http://quizilla.teennick.com"
         local fulluserurl2 = baseurl..userurl2
         if string.match(fulluserurl2, "/user/"..item_value) 
-          or string.match(url, "/templates/")
-          or string.match(url, "/media/")
-          or string.match(url, "/data/")
-          or string.match(url, "/nick%-assets/")
-          or string.match(url, "cdn%.gigya%.com")
-          or string.match(url, "/user_images/")
-          or string.match(url, "/static/") then
+          or string.match(fulluserurl2, "/templates/")
+          or string.match(fulluserurl2, "/media/")
+          or string.match(fulluserurl2, "/data/")
+          or string.match(fulluserurl2, "/nick%-assets/")
+          or string.match(fulluserurl2, "cdn%.gigya%.com")
+          or string.match(fulluserurl2, "/user_images/")
+          or string.match(fulluserurl2, "/static/") then
           if downloaded[fulluserurl2] ~= true then
             table.insert(urls, { url=fulluserurl2 })
           end
