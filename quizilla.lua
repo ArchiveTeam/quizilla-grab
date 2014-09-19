@@ -38,23 +38,48 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
   if item_type == "page" then
     if string.match(url, item_value) then
       html = read_file(file)
-      for adurl in string.gmatch(html, '(/templates/QZ2/ad%.html[^"]+)') do
-        local baseurl = "http://quizilla.teennick.com"
-        local fulladurl = baseurl..adurl
-        if downloaded[fulladurl] ~= true then
-          table.insert(urls, { url=fulladurl })
+--      for adurl in string.gmatch(html, '(/templates/QZ2/ad%.html[^"]+)') do
+--        local baseurl = "http://quizilla.teennick.com"
+--        local fulladurl = baseurl..adurl
+--        if downloaded[fulladurl] ~= true then
+--          table.insert(urls, { url=fulladurl })
+--        end
+--      end
+      for customurl in string.gmatch(html, '"(http[s]?://[^"]+)') do
+        if string.match(customurl, item_value)
+          or string.match(customurl, "/templates/")
+          or string.match(customurl, "/media/")
+          or string.match(customurl, "/data/")
+          or string.match(customurl, "/nick%-assets/")
+          or string.match(customurl, "cdn%.gigya%.com")
+          or string.match(customurl, "/user_images/")
+          or string.match(customurl, "/static/") then
+          if downloaded[userurl] ~= true then
+            table.insert(urls, { url=userurl })
+            if string.match(customurl, "www%.quizilla%.teennick%.com") then
+              local customurlprocessed = string.gsub(customurl, "www%.quizilla%.teennick%.com", "quizilla%.teennick%.com")
+              if downloaded[customurlprocessed] ~= true then
+                table.insert(urls, { url=customurlprocessed })
+              end
+            elseif string.match(customurl, "www%.quizilla%.teenninck%.com") then
+              local customurlprocessed = string.gsub(customurl, "www%.quizilla%.teenninck%.com", "quizilla%.teennick%.com")
+              if downloaded[customurlprocessed] ~= true then
+                table.insert(urls, { url=customurlprocessed })
+              end
+            end
+          end
         end
-      end
-      for swfurl in string.gmatch(html, '<param name="movie"[^"]+"(http://www%.quizilla%.teennick%.com/[^"]+)"') do
-        if downloaded[swfurl] ~= true then
-          table.insert(urls, { url=swfurl })
-        end
-      end
-      for swfurlb in string.gmatch(html, '<embed src="(http://www%.quizilla%.teennick%.com/[^"]+)"') do
-        if downloaded[swfurlb] ~= true then
-          table.insert(urls, { url=swfurlb })
-        end
-      end
+      end 
+--      for swfurl in string.gmatch(html, '<param name="movie"[^"]+"(http://www%.quizilla%.teennick%.com/[^"]+)"') do
+--        if downloaded[swfurl] ~= true then
+--          table.insert(urls, { url=swfurl })
+--        end
+--      end
+--      for swfurlb in string.gmatch(html, '<embed src="(http://www%.quizilla%.teennick%.com/[^"]+)"') do
+--        if downloaded[swfurlb] ~= true then
+--          table.insert(urls, { url=swfurlb })
+--        end
+--      end
       for pageurl in string.gmatch(html, 'mailto:[^=]+=[^=]+=(http[^"]+)">') do
         local pageurlprocessed = string.gsub(pageurl, "www%.quizilla%.teenninck%.com", "quizilla%.teennick%.com")
         table.insert(urls, { url=pageurlprocessed })
