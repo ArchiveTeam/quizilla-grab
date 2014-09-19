@@ -133,16 +133,30 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         end
       end
       for userurl in string.gmatch(html, '"(http[s]?://[^"]+)') do
-        if string.match(userurl, "/user/"..item_value) then
+        if string.match(userurl, "/user/"..item_value)
+          or string.match(url, "/templates/")
+          or string.match(url, "/media/")
+          or string.match(url, "/data/")
+          or string.match(url, "/nick%-assets/")
+          or string.match(url, "cdn%.gigya%.com")
+          or string.match(url, "/user_images/")
+          or string.match(url, "/static/") then
           if downloaded[userurl] ~= true then
             table.insert(urls, { url=userurl })
           end
         end
       end
-      for userurl2 in string.gmatch(html, '/user/[^"]+') do
+      for userurl2 in string.gmatch(html, '"/[^"]+') do
         local baseurl = "http://quizilla.teennick.com"
         local fulluserurl2 = baseurl..userurl2
-        if string.match(fulluserurl2, "/user/"..item_value) then
+        if string.match(fulluserurl2, "/user/"..item_value) 
+          or string.match(url, "/templates/")
+          or string.match(url, "/media/")
+          or string.match(url, "/data/")
+          or string.match(url, "/nick%-assets/")
+          or string.match(url, "cdn%.gigya%.com")
+          or string.match(url, "/user_images/")
+          or string.match(url, "/static/") then
           if downloaded[fulluserurl2] ~= true then
             table.insert(urls, { url=fulluserurl2 })
           end
