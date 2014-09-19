@@ -146,7 +146,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           end
         end
       end
-      for userurl2 in string.gmatch(html, '"/[^"]+') do
+      for userurl2 in string.gmatch(html, '"(/[^"]+)') do
         local baseurl = "http://quizilla.teennick.com"
         local fulluserurl2 = baseurl..userurl2
         if string.match(fulluserurl2, "/user/"..item_value) 
