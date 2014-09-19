@@ -100,6 +100,22 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         local pageurlprocessed = string.gsub(pageurl, "www%.quizilla%.teenninck%.com", "quizilla%.teennick%.com")
         table.insert(urls, { url=pageurlprocessed })
       end
+      for pageurl in string.gmatch(html, 'name="quiz_title" value="([^"]+)"') do
+        local urlid = string.match(url, "http[s]?://quizilla.teennick.com/[^/]+/([0-9]+)")
+        local urlbase = string.match(url, "(http[s]?://quizilla.teennick.com/[^/]+/)")
+        local fullpageurl = urlbase..urlid.."/"..pageurl
+        if downloaded[fullpageurl] ~= true then
+          table.insert(urls, { url=fullpageurl })
+        end
+      end
+      for pageurl in string.gmatch(html, 'name="poll_title" value="([^"]+)"') do
+        local urlid = string.match(url, "http[s]?://quizilla.teennick.com/[^/]+/([0-9]+)")
+        local urlbase = string.match(url, "(http[s]?://quizilla.teennick.com/[^/]+/)")
+        local fullpageurl = urlbase..urlid.."/"..pageurl
+        if downloaded[fullpageurl] ~= true then
+          table.insert(urls, { url=fullpageurl })
+        end
+      end
       if (string.match(url, "/quizzes/") and status_code_global == 200) then
         local urlid = string.match(url, "http://[^/]+/[^/]+/([0-9]+)")
         if string.match(html, '<input id="a_[0-9]+" type="[^"]+" name="answers%[[0-9]+%]" value="[0-9]+" />') then
