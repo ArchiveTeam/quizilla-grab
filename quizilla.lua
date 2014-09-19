@@ -55,7 +55,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurl, "/user_images/")
           or string.match(customurl, "/static/") then
           if downloaded[userurl] ~= true then
-            table.insert(urls, { url=userurl })
+            table.insert(urls, { url=customurl })
             if string.match(customurl, "www%.quizilla%.teennick%.com") then
               local customurlprocessed = string.gsub(customurl, "www%.quizilla%.teennick%.com", "quizilla%.teennick%.com")
               if downloaded[customurlprocessed] ~= true then
@@ -67,6 +67,22 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
                 table.insert(urls, { url=customurlprocessed })
               end
             end
+          end
+        end
+      end 
+      for customurlnf in string.gmatch(html, '"(/[^"]+)') do
+        local baseurl = "http://quizilla.teennick.com"
+        local customurl = baseurl..customurlnf
+        if string.match(customurl, item_value)
+          or string.match(customurl, "/templates/")
+          or string.match(customurl, "/media/")
+          or string.match(customurl, "/data/")
+          or string.match(customurl, "/nick%-assets/")
+          or string.match(customurl, "cdn%.gigya%.com")
+          or string.match(customurl, "/user_images/")
+          or string.match(customurl, "/static/") then
+          if downloaded[userurl] ~= true then
+            table.insert(urls, { url=customurl })
           end
         end
       end 
