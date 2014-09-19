@@ -500,7 +500,7 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
     else
       return wget.actions.CONTINUE
     end
-  elseif status_code == 301 and string.match(url, "polls") then
+  elseif status_code == 301 and string.match(url["url"], "polls") then
     return wget.actions.EXIT
   end
 
