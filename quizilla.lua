@@ -174,149 +174,173 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
   
   if item_type == "page" then
     if string.match(url, item_value) then
-      html = read_file(file)
---      for adurl in string.gmatch(html, '(/templates/QZ2/ad%.html[^"]+)') do
---        local baseurl = "http://quizilla.teennick.com"
---        local fulladurl = baseurl..adurl
---        if downloaded[fulladurl] ~= true then
---          table.insert(urls, { url=fulladurl })
---        end
---      end
-      for customurl in string.gmatch(html, '"(http[s]?://[^"]+)') do
-        if string.match(customurl, item_value)
-          or string.match(customurl, "/templates/")
-          or string.match(customurl, "/media/")
-          or string.match(customurl, "/data/")
-          or string.match(customurl, "/nick%-assets/")
-          or string.match(customurl, "cdn%.gigya%.com")
-          or string.match(customurl, "/user_images/")
-          or string.match(customurl, "/static/") then
-          if downloaded[customurl] ~= true then
-            if not string.match(customurl, "teenninck") then
-              table.insert(urls, { url=customurl })
-            end
-            if string.match(customurl, "www%.quizilla%.teennick%.com") then
-              local customurlprocessed = string.gsub(customurl, "www%.quizilla%.teennick%.com", "quizilla%.teennick%.com")
-              if downloaded[customurlprocessed] ~= true then
-                table.insert(urls, { url=customurlprocessed })
+      if last_http_statcode == 404 or last_http_statcode == 301 then
+        if string.match(url, "http://quizilla%.teennick%.com/stories/[0-9]+") then
+          local quizurl = string.gsub(url, "/stories/", "/quizzes/")
+          if downloaded[quizurl] ~= true then
+            table.insert(urls, { url=quizurl })
+          end
+        elseif string.match(url, "http://quizilla%.teennick%.com/quizzes/[0-9]+") then
+          local pollurl = string.gsub(url, "/quizzes/", "/polls/")
+          if downloaded[pollurl] ~= true then
+            table.insert(urls, { url=pollurl })
+          end
+        elseif string.match(url, "http://quizilla%.teennick%.com/polls/[0-9]+") then
+          local poemurl = string.gsub(url, "/polls/", "/poems/")
+          if downloaded[poemurl] ~= true then
+            table.insert(urls, { url=poemurl })
+          end
+        elseif string.match(url, "http://quizilla%.teennick%.com/poems/[0-9]+") then
+          local lyricurl = string.gsub(url, "/poems/", "/lyrics/")
+          if downloaded[lyricurl] ~= true then
+            table.insert(urls, { url=lyricurl })
+          end
+        end
+      elseif last_http_statcode == 200 then
+        html = read_file(file)
+  --      for adurl in string.gmatch(html, '(/templates/QZ2/ad%.html[^"]+)') do
+  --        local baseurl = "http://quizilla.teennick.com"
+  --        local fulladurl = baseurl..adurl
+  --        if downloaded[fulladurl] ~= true then
+  --          table.insert(urls, { url=fulladurl })
+  --        end
+  --      end
+        for customurl in string.gmatch(html, '"(http[s]?://[^"]+)') do
+          if string.match(customurl, item_value)
+            or string.match(customurl, "/templates/")
+            or string.match(customurl, "/media/")
+            or string.match(customurl, "/data/")
+            or string.match(customurl, "/nick%-assets/")
+            or string.match(customurl, "cdn%.gigya%.com")
+            or string.match(customurl, "/user_images/")
+            or string.match(customurl, "/static/") then
+            if downloaded[customurl] ~= true then
+              if not string.match(customurl, "teenninck") then
+                table.insert(urls, { url=customurl })
               end
-            elseif string.match(customurl, "www%.quizilla%.teenninck%.com") then
-              local customurlprocessed = string.gsub(customurl, "www%.quizilla%.teenninck%.com", "quizilla%.teennick%.com")
-              if downloaded[customurlprocessed] ~= true then
-                table.insert(urls, { url=customurlprocessed })
+              if string.match(customurl, "www%.quizilla%.teennick%.com") then
+                local customurlprocessed = string.gsub(customurl, "www%.quizilla%.teennick%.com", "quizilla%.teennick%.com")
+                if downloaded[customurlprocessed] ~= true then
+                  table.insert(urls, { url=customurlprocessed })
+                end
+              elseif string.match(customurl, "www%.quizilla%.teenninck%.com") then
+                local customurlprocessed = string.gsub(customurl, "www%.quizilla%.teenninck%.com", "quizilla%.teennick%.com")
+                if downloaded[customurlprocessed] ~= true then
+                  table.insert(urls, { url=customurlprocessed })
+                end
               end
             end
           end
-        end
-      end 
-      for customurlnf in string.gmatch(html, '"(/[^"]+)') do
-        local baseurl = "http://quizilla.teennick.com"
-        local customurl = baseurl..customurlnf
-        if string.match(customurl, item_value)
-          or string.match(customurl, "/templates/")
+        end 
+        for customurlnf in string.gmatch(html, '"(/[^"]+)') do
+          local baseurl = "http://quizilla.teennick.com"
+          local customurl = baseurl..customurlnf
+          if string.match(customurl, item_value)
+            or string.match(customurl, "/templates/")
           or string.match(customurl, "/media/")
-          or string.match(customurl, "/data/")
-          or string.match(customurl, "/nick%-assets/")
-          or string.match(customurl, "cdn%.gigya%.com")
-          or string.match(customurl, "/user_images/")
-          or string.match(customurl, "/static/") then
-          if downloaded[customurl] ~= true then
-            if not string.match(customurl, "teenninck") then
-              table.insert(urls, { url=customurl })
+            or string.match(customurl, "/data/")
+            or string.match(customurl, "/nick%-assets/")
+            or string.match(customurl, "cdn%.gigya%.com")
+            or string.match(customurl, "/user_images/")
+            or string.match(customurl, "/static/") then
+            if downloaded[customurl] ~= true then
+              if not string.match(customurl, "teenninck") then
+                table.insert(urls, { url=customurl })
+              end
             end
           end
-        end
-      end 
+        end 
 --      for swfurl in string.gmatch(html, '<param name="movie"[^"]+"(http://www%.quizilla%.teennick%.com/[^"]+)"') do
---        if downloaded[swfurl] ~= true then
---          table.insert(urls, { url=swfurl })
---        end
---      end
---      for swfurlb in string.gmatch(html, '<embed src="(http://www%.quizilla%.teennick%.com/[^"]+)"') do
---        if downloaded[swfurlb] ~= true then
---          table.insert(urls, { url=swfurlb })
---        end
---      end
-      for pageurl in string.gmatch(html, 'mailto:[^=]+=[^=]+=(http[^"]+)">') do
-        local pageurlprocessed = string.gsub(pageurl, "www%.quizilla%.teenninck%.com", "quizilla%.teennick%.com")
-        table.insert(urls, { url=pageurlprocessed })
-      end
-      for pageurl in string.gmatch(html, 'name="quiz_title" value="([^"]+)"') do
-        local urlid = string.match(url, "http[s]?://quizilla.teennick.com/[^/]+/([0-9]+)")
-        local urlbase = string.match(url, "(http[s]?://quizilla.teennick.com/[^/]+/)")
-        local fullpageurl = urlbase..urlid.."/"..pageurl
-        if downloaded[fullpageurl] ~= true then
-          table.insert(urls, { url=fullpageurl })
+  --        if downloaded[swfurl] ~= true then
+  --          table.insert(urls, { url=swfurl })
+  --        end
+  --      end
+  --      for swfurlb in string.gmatch(html, '<embed src="(http://www%.quizilla%.teennick%.com/[^"]+)"') do
+  --        if downloaded[swfurlb] ~= true then
+  --          table.insert(urls, { url=swfurlb })
+  --        end
+  --      end
+        for pageurl in string.gmatch(html, 'mailto:[^=]+=[^=]+=(http[^"]+)">') do
+          local pageurlprocessed = string.gsub(pageurl, "www%.quizilla%.teenninck%.com", "quizilla%.teennick%.com")
+          table.insert(urls, { url=pageurlprocessed })
         end
-      end
-      for pageurl in string.gmatch(html, 'name="poll_title" value="([^"]+)"') do
-        local urlid = string.match(url, "http[s]?://quizilla.teennick.com/[^/]+/([0-9]+)")
-        local urlbase = string.match(url, "(http[s]?://quizilla.teennick.com/[^/]+/)")
-        local fullpageurl = urlbase..urlid.."/"..pageurl
-        if downloaded[fullpageurl] ~= true then
-          table.insert(urls, { url=fullpageurl })
-        end
-      end
-      if (string.match(url, "/quizzes/") and status_code_global == 200) then
-        local urlid = string.match(url, "http://[^/]+/[^/]+/([0-9]+)")
-        if string.match(html, '<input id="a_[0-9]+" type="[^"]+" name="answers%[[0-9]+%]" value="[0-9]+" />') then
-          local input_id = string.match(html, '<input id="a_[0-9]+" type="[^"]+" name="answers%[[0-9]+%]" value="([0-9]+)" />')
-          local input_id_name = string.match(html, '<input id="a_[0-9]+" type="[^"]+" name="(answers%[[0-9]+%])" value="[0-9]+" />')
-          local quiz_id = string.match(html, 'name="quiz_id" value="([0-9]+)">')
-          local quiz_title = string.match(html, 'name="quiz_title" value="([^"]+)">')
-          if post_requests[quiz_id] ~= true then
-            table.insert(urls, { url="http://quizilla.teennick.com/quizzes?task=submit",
-                                 post_data=(string.gsub(string.gsub(input_id_name, "%[", "%%5B"), "%]", "%%5D").."="..input_id.."&quiz_id="..quiz_id.."&quiz_title="..quiz_title) })
-            post_requests[quiz_id] = true
+        for pageurl in string.gmatch(html, 'name="quiz_title" value="([^"]+)"') do
+          local urlid = string.match(url, "http[s]?://quizilla.teennick.com/[^/]+/([0-9]+)")
+          local urlbase = string.match(url, "(http[s]?://quizilla.teennick.com/[^/]+/)")
+          local fullpageurl = urlbase..urlid.."/"..pageurl
+          if downloaded[fullpageurl] ~= true then
+            table.insert(urls, { url=fullpageurl })
           end
         end
-      end
-      if string.match(url, "http://[^/]+/quizzes/result/[0-9]+/[0-9]+") then
-        local result_id = string.match(url, "http://[^/]+/quizzes/result/[0-9]+/([0-9]+)")
-        local result_base = string.match(url, "(http://[^/]+/quizzes/result/[0-9]+/)[0-9]+")
-        local quiz_id = string.match(url, "http://[^/]+/quizzes/result/([0-9]+)/[0-9]+")
-        if results[quiz_id] ~= true then
-          local result_id_plus_1 = result_id + 1
-          local result_id_plus_2 = result_id + 2
-          local result_id_plus_3 = result_id + 3
-          local result_id_plus_4 = result_id + 4
-          local result_id_plus_5 = result_id + 5
-          local result_id_plus_6 = result_id + 6
-          local result_id_plus_7 = result_id + 7
-          local result_id_plus_8 = result_id + 8
-          local result_id_plus_9 = result_id + 9
-          local result_id_plus_10 = result_id + 10
-          local result_id_minus_1 = result_id - 1
-          local result_id_minus_2 = result_id - 2
-          local result_id_minus_3 = result_id - 3
-          local result_id_minus_4 = result_id - 4
-          local result_id_minus_5 = result_id - 5
-          local result_id_minus_6 = result_id - 6
-          local result_id_minus_7 = result_id - 7
-          local result_id_minus_8 = result_id - 8
-          local result_id_minus_9 = result_id - 9
-          local result_id_minus_10 = result_id - 10
-          table.insert(urls, { url=(result_base..result_id_plus_1.."/") })
-          table.insert(urls, { url=(result_base..result_id_plus_2.."/") })
-          table.insert(urls, { url=(result_base..result_id_plus_3.."/") })
-          table.insert(urls, { url=(result_base..result_id_plus_4.."/") })
-          table.insert(urls, { url=(result_base..result_id_plus_5.."/") })
-          table.insert(urls, { url=(result_base..result_id_plus_6.."/") })
-          table.insert(urls, { url=(result_base..result_id_plus_7.."/") })
-          table.insert(urls, { url=(result_base..result_id_plus_8.."/") })
-          table.insert(urls, { url=(result_base..result_id_plus_9.."/") })
-          table.insert(urls, { url=(result_base..result_id_plus_10.."/") })
-          table.insert(urls, { url=(result_base..result_id_minus_1.."/") })
-          table.insert(urls, { url=(result_base..result_id_minus_2.."/") })
-          table.insert(urls, { url=(result_base..result_id_minus_3.."/") })
-          table.insert(urls, { url=(result_base..result_id_minus_4.."/") })
-          table.insert(urls, { url=(result_base..result_id_minus_5.."/") })
-          table.insert(urls, { url=(result_base..result_id_minus_6.."/") })
-          table.insert(urls, { url=(result_base..result_id_minus_7.."/") })
-          table.insert(urls, { url=(result_base..result_id_minus_8.."/") })
-          table.insert(urls, { url=(result_base..result_id_minus_9.."/") })
-          table.insert(urls, { url=(result_base..result_id_minus_10.."/") })
-          results[quiz_id] = true
+        for pageurl in string.gmatch(html, 'name="poll_title" value="([^"]+)"') do
+          local urlid = string.match(url, "http[s]?://quizilla.teennick.com/[^/]+/([0-9]+)")
+          local urlbase = string.match(url, "(http[s]?://quizilla.teennick.com/[^/]+/)")
+          local fullpageurl = urlbase..urlid.."/"..pageurl
+          if downloaded[fullpageurl] ~= true then
+            table.insert(urls, { url=fullpageurl })
+          end
+        end
+        if (string.match(url, "/quizzes/") and status_code_global == 200) then
+          local urlid = string.match(url, "http://[^/]+/[^/]+/([0-9]+)")
+          if string.match(html, '<input id="a_[0-9]+" type="[^"]+" name="answers%[[0-9]+%]" value="[0-9]+" />') then
+            local input_id = string.match(html, '<input id="a_[0-9]+" type="[^"]+" name="answers%[[0-9]+%]" value="([0-9]+)" />')
+            local input_id_name = string.match(html, '<input id="a_[0-9]+" type="[^"]+" name="(answers%[[0-9]+%])" value="[0-9]+" />')
+            local quiz_id = string.match(html, 'name="quiz_id" value="([0-9]+)">')
+            local quiz_title = string.match(html, 'name="quiz_title" value="([^"]+)">')
+            if post_requests[quiz_id] ~= true then
+              table.insert(urls, { url="http://quizilla.teennick.com/quizzes?task=submit",
+                                   post_data=(string.gsub(string.gsub(input_id_name, "%[", "%%5B"), "%]", "%%5D").."="..input_id.."&quiz_id="..quiz_id.."&quiz_title="..quiz_title) })
+              post_requests[quiz_id] = true
+            end
+          end
+        end
+        if string.match(url, "http://[^/]+/quizzes/result/[0-9]+/[0-9]+") then
+          local result_id = string.match(url, "http://[^/]+/quizzes/result/[0-9]+/([0-9]+)")
+          local result_base = string.match(url, "(http://[^/]+/quizzes/result/[0-9]+/)[0-9]+")
+          local quiz_id = string.match(url, "http://[^/]+/quizzes/result/([0-9]+)/[0-9]+")
+          if results[quiz_id] ~= true then
+            local result_id_plus_1 = result_id + 1
+            local result_id_plus_2 = result_id + 2
+            local result_id_plus_3 = result_id + 3
+            local result_id_plus_4 = result_id + 4
+            local result_id_plus_5 = result_id + 5
+            local result_id_plus_6 = result_id + 6
+            local result_id_plus_7 = result_id + 7
+            local result_id_plus_8 = result_id + 8
+            local result_id_plus_9 = result_id + 9
+            local result_id_plus_10 = result_id + 10
+            local result_id_minus_1 = result_id - 1
+            local result_id_minus_2 = result_id - 2
+            local result_id_minus_3 = result_id - 3
+            local result_id_minus_4 = result_id - 4
+            local result_id_minus_5 = result_id - 5
+            local result_id_minus_6 = result_id - 6
+            local result_id_minus_7 = result_id - 7
+            local result_id_minus_8 = result_id - 8
+            local result_id_minus_9 = result_id - 9
+            local result_id_minus_10 = result_id - 10
+            table.insert(urls, { url=(result_base..result_id_plus_1.."/") })
+            table.insert(urls, { url=(result_base..result_id_plus_2.."/") })
+            table.insert(urls, { url=(result_base..result_id_plus_3.."/") })
+            table.insert(urls, { url=(result_base..result_id_plus_4.."/") })
+            table.insert(urls, { url=(result_base..result_id_plus_5.."/") })
+            table.insert(urls, { url=(result_base..result_id_plus_6.."/") })
+            table.insert(urls, { url=(result_base..result_id_plus_7.."/") })
+            table.insert(urls, { url=(result_base..result_id_plus_8.."/") })
+            table.insert(urls, { url=(result_base..result_id_plus_9.."/") })
+            table.insert(urls, { url=(result_base..result_id_plus_10.."/") })
+            table.insert(urls, { url=(result_base..result_id_minus_1.."/") })
+            table.insert(urls, { url=(result_base..result_id_minus_2.."/") })
+            table.insert(urls, { url=(result_base..result_id_minus_3.."/") })
+            table.insert(urls, { url=(result_base..result_id_minus_4.."/") })
+            table.insert(urls, { url=(result_base..result_id_minus_5.."/") })
+            table.insert(urls, { url=(result_base..result_id_minus_6.."/") })
+            table.insert(urls, { url=(result_base..result_id_minus_7.."/") })
+            table.insert(urls, { url=(result_base..result_id_minus_8.."/") })
+            table.insert(urls, { url=(result_base..result_id_minus_9.."/") })
+            table.insert(urls, { url=(result_base..result_id_minus_10.."/") })
+            results[quiz_id] = true
+          end
         end
       end
     end
@@ -456,6 +480,8 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
   if status_code >= 200 and status_code <= 399 then
     downloaded[url.url] = true
   end
+  
+  last_http_statcode = status_code
   
   if status_code >= 500 or
     (status_code >= 400 and status_code ~= 404) then
