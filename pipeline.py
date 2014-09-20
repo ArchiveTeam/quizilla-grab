@@ -57,7 +57,7 @@ if not WGET_LUA:
 #
 # Update this each time you make a non-cosmetic change.
 # It will be added to the WARC files and reported to the tracker.
-VERSION = "20140919.05"
+VERSION = "20140919.06"
 USER_AGENT = 'ArchiveTeam'
 TRACKER_ID = 'quizilla'
 TRACKER_HOST = 'tracker.archiveteam.org'
@@ -205,16 +205,8 @@ class WgetArgs(object):
             suffixesa = string.digits
             suffixesb = string.digits
             
-            for args in [('http://quizilla.teennick.com/quizzes/{0}{1}{2}'.format(item_value, a, b), \
-                          'http://quizilla.teennick.com/stories/{0}{1}{2}'.format(item_value, a, b), \
-                          'http://quizilla.teennick.com/polls/{0}{1}{2}'.format(item_value, a, b), \
-                          'http://quizilla.teennick.com/poems/{0}{1}{2}'.format(item_value, a, b), \
-                          'http://quizilla.teennick.com/lyrics/{0}{1}{2}'.format(item_value, a, b)) for a in suffixesa for b in suffixesb]:
+            for args in [('http://quizilla.teennick.com/stories/{0}{1}{2}'.format(item_value, a, b)) for a in suffixesa for b in suffixesb]:
                 wget_args.append(args[0])
-                wget_args.append(args[1])
-                wget_args.append(args[2])
-                wget_args.append(args[3])
-                wget_args.append(args[4])
         
         elif item_type == 'user':
             wget_args.append('http://quizilla.teennick.com/user/{0}'.format(item_value))
