@@ -57,7 +57,7 @@ if not WGET_LUA:
 #
 # Update this each time you make a non-cosmetic change.
 # It will be added to the WARC files and reported to the tracker.
-VERSION = "20140920.01"
+VERSION = "20140920.02"
 USER_AGENT = 'ArchiveTeam'
 TRACKER_ID = 'quizilla'
 TRACKER_HOST = 'tracker.archiveteam.org'
@@ -255,7 +255,11 @@ pipeline = Pipeline(
     WgetDownload(
         WgetArgs(),
         max_tries=2,
-        accept_on_exit_code=[0, 8],
+        # Future coders:
+        # Exit status 4, network failure, must be handled in
+        # the lua script (wget does not retry)
+        # In this case, we are retrying. So it is ok to accept 4 :)
+        accept_on_exit_code=[0, 4, 8],
         env={
             "item_dir": ItemValue("item_dir"),
             "item_value": ItemValue("item_value"),
