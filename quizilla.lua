@@ -181,17 +181,17 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
             table.insert(urls, { url=quizurl })
           end
         elseif string.match(url, "http://quizilla%.teennick%.com/quizzes/[0-9]+") then
-          local pollurl = string.gsub(url, "/quizzes/", "/polls/")
+          local pollurl = string.gsub(url, "/quizzes/", "/poems/")
           if downloaded[pollurl] ~= true then
             table.insert(urls, { url=pollurl })
           end
-        elseif string.match(url, "http://quizilla%.teennick%.com/polls/[0-9]+") then
-          local poemurl = string.gsub(url, "/polls/", "/poems/")
+        elseif string.match(url, "http://quizilla%.teennick%.com/poems/[0-9]+") then
+          local poemurl = string.gsub(url, "/poems/", "/lyrics/")
           if downloaded[poemurl] ~= true then
             table.insert(urls, { url=poemurl })
           end
-        elseif string.match(url, "http://quizilla%.teennick%.com/poems/[0-9]+") then
-          local lyricurl = string.gsub(url, "/poems/", "/lyrics/")
+        elseif string.match(url, "http://quizilla%.teennick%.com/lyrics/[0-9]+") then
+          local lyricurl = string.gsub(url, "/lyrics/", "/polls/")
           if downloaded[lyricurl] ~= true then
             table.insert(urls, { url=lyricurl })
           end
