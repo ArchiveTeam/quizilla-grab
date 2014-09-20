@@ -168,6 +168,33 @@ downloaded["http://quizilla.teennick.com/templates/QZ2/images/dev/bg_wrapper.gif
 downloaded["http://quizilla.teennick.com/templates/QZ2/images/dev/macFFBgHack.png"] = true
 downloaded["http://cdn.gigya.com/wildfire/js/wfapiv2.js"] = true
 downloaded["http://quizilla.teennick.com/static/js/min/events-overlay-deps.js"] = true
+downloaded["http://quizilla.teennick.com/templates/QZ2/css/global.css"] = true
+downloaded["http://quizilla.teennick.com/templates/QZ2/css/thickbox.css"] = true
+downloaded["http://quizilla.teennick.com/templates/QZ2/js/jquery.js"] = true
+downloaded["http://quizilla.teennick.com/templates/QZ2/js/jquery.tabs.pack.js"] = true
+downloaded["http://quizilla.teennick.com/templates/QZ2/js/jquery.thickbox.pack.js"] = true
+downloaded["http://quizilla.teennick.com/templates/QZ2/js/jquery.jqModal.js"] = true
+downloaded["http://quizilla.teennick.com/templates/QZ2/js/jquery.rating.js"] = true
+downloaded["http://quizilla.teennick.com/templates/QZ2/js/jquery.form.js"] = true
+downloaded["http://quizilla.teennick.com/templates/QZ2/js/autocomplete.js"] = true
+downloaded["http://quizilla.teennick.com/templates/QZ2/js/spnResults.js"] = true
+downloaded["http://quizilla.teennick.com/templates/QZ2/js/global.js"] = true
+downloaded["http://www.teennick.com/nick-assets/quizilla/adunit.js"] = true
+downloaded["http://www.nick.com/sbcom/data/utils/aria-inc.jhtml?site=quizilla.com"] = true
+downloaded["http://www.nickelodeon.nl/"] = true
+downloaded["http://quizilla.teennick.com/templates/QZ2/js/quizilla_coda_functions.js"] = true
+downloaded["http://quizilla.teennick.com/templates/QZ2/js/quizilla_coda_nomod.js"] = true
+downloaded["http://quizilla.teennick.com/templates/QZ2/js/quizilla_coda_processor.js"] = true
+downloaded["http://www.quizilla.teennick.com/media/images/qzms_readmore.gif"] = true
+downloaded["http://www.teennick.com/media/images/qzms_readmore.gif"] = true
+downloaded["http://www.quizilla.teennick.com/media/images/myspace_qzlogo.gif"] = true
+downloaded["http://www.teennick.com/media/images/myspace_qzlogo.gif"] = true
+downloaded["http://quizilla.teennick.com/templates/QZ2/js/slink_writer.js"] = true
+downloaded["http://quizilla.teennick.com/media/images/comscore.gif"] = true
+downloaded["http://quizilla.teennick.com/media/images/myspace_qzlogo.gif"] = true
+downloaded["http://quizilla.teennick.com/media/images/qzms_readmore.gif"] = true
+downloaded["http://quizilla.teennick.com/templates/QZ2/css/site_structure.css"] = true
+downloaded["http://quizilla.teennick.com/templates/QZ2/js/quizilla_coda.js"] = true
 
 wget.callbacks.get_urls = function(file, url, is_css, iri)
   local urls = {}
