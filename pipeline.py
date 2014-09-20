@@ -205,16 +205,16 @@ class WgetArgs(object):
             suffixesa = string.digits
             suffixesb = string.digits
             
-            for args in [('http://quizilla.teennick.com/stories/{0}0{1}'.format(item_value, a), \
-                          'http://quizilla.teennick.com/stories/{0}1{1}'.format(item_value, a), \
-                          'http://quizilla.teennick.com/stories/{0}2{1}'.format(item_value, a), \
-                          'http://quizilla.teennick.com/stories/{0}3{1}'.format(item_value, a), \
-                          'http://quizilla.teennick.com/stories/{0}4{1}'.format(item_value, a), \
-                          'http://quizilla.teennick.com/stories/{0}5{1}'.format(item_value, a), \
-                          'http://quizilla.teennick.com/stories/{0}6{1}'.format(item_value, a), \
-                          'http://quizilla.teennick.com/stories/{0}7{1}'.format(item_value, a), \
-                          'http://quizilla.teennick.com/stories/{0}8{1}'.format(item_value, a), \
-                          'http://quizilla.teennick.com/stories/{0}9{1}'.format(item_value, a)) for a in suffixesa]:
+            for args in [('http://quizilla.teennick.com/stories/{0}{1}0'.format(item_value, a), \
+                          'http://quizilla.teennick.com/stories/{0}{1}1'.format(item_value, a), \
+                          'http://quizilla.teennick.com/stories/{0}{1}2'.format(item_value, a), \
+                          'http://quizilla.teennick.com/stories/{0}{1}3'.format(item_value, a), \
+                          'http://quizilla.teennick.com/stories/{0}{1}4'.format(item_value, a), \
+                          'http://quizilla.teennick.com/stories/{0}{1}5'.format(item_value, a), \
+                          'http://quizilla.teennick.com/stories/{0}{1}6'.format(item_value, a), \
+                          'http://quizilla.teennick.com/stories/{0}{1}7'.format(item_value, a), \
+                          'http://quizilla.teennick.com/stories/{0}{1}8'.format(item_value, a), \
+                          'http://quizilla.teennick.com/stories/{0}{1}9'.format(item_value, a)) for a in suffixesa]:
                 wget_args.append(args[0])
                 wget_args.append(args[1])
                 wget_args.append(args[2])
