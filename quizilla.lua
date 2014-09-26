@@ -524,8 +524,7 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
       else
         return wget.actions.CONTINUE
       end
-  elseif status_code >= 500 or
-    (status_code >= 400 and status_code ~= 404) then
+  elseif (status_code >= 400 and status_code ~= 404) then
     if string.match(url["host"], "teennick%.com") then
       
       io.stdout:write("\nServer returned "..http_stat.statcode.." for " .. url["url"] .. ". Sleeping.\n")
