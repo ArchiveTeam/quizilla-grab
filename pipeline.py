@@ -57,7 +57,7 @@ if not WGET_LUA:
 #
 # Update this each time you make a non-cosmetic change.
 # It will be added to the WARC files and reported to the tracker.
-VERSION = "20140926.01"
+VERSION = "20140928.01"
 USER_AGENT = 'ArchiveTeam'
 TRACKER_ID = 'quizilla'
 TRACKER_HOST = 'tracker.archiveteam.org'
@@ -229,6 +229,7 @@ class WgetArgs(object):
         elif item_type == 'user':
             wget_args.append('http://quizilla.teennick.com/user/{0}'.format(item_value))
             wget_args.append('http://quizilla.teennick.com/user/{0}/profile'.format(item_value))
+            wget_args.append('http://quizilla.teennick.com/user/{0}/friends'.format(item_value))
         
         elif item_type == 'tag':
             wget_args.append('http://quizilla.teennick.com/tags/{0}'.format(item_value))
