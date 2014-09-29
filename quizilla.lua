@@ -554,17 +554,32 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
       end
     end
   elseif status_code == 0 then
-    io.stdout:write("\nServer returned "..http_stat.statcode.." for " .. url["url"] .. ". Sleeping.\n")
-    io.stdout:flush()
-    
-    os.execute("sleep 10")
-    
-    tries = tries + 1
-    
-    if tries >= 5 then
-      return wget.actions.ABORT
+    if string.match(url["host"], "teennick%.com") then
+      io.stdout:write("\nServer returned "..http_stat.statcode.." for " .. url["url"] .. ". Sleeping.\n")
+      io.stdout:flush()
+      
+      os.execute("sleep 10")
+      
+      tries = tries + 1
+      
+      if tries >= 5 then
+        return wget.actions.ABORT
+      else
+        return wget.actions.CONTINUE
+      end
     else
-      return wget.actions.CONTINUE
+      io.stdout:write("\nServer returned "..http_stat.statcode.." for " .. url["url"] .. ". Sleeping.\n")
+      io.stdout:flush()
+      
+      os.execute("sleep 10")
+      
+      tries = tries + 1
+      
+      if tries >= 5 then
+        return wget.actions.EXIT
+      else
+        return wget.actions.CONTINUE
+      end
     end
   elseif status_code == 301 and string.match(url["url"], "polls") then
     return wget.actions.EXIT
