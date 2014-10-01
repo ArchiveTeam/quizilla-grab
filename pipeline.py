@@ -227,9 +227,9 @@ class WgetArgs(object):
                 wget_args.append(args[9])
         
         elif item_type == 'user':
-            wget_args.append('http://quizilla.teennick.com/user/{0}'.format(item_value))
-            wget_args.append('http://quizilla.teennick.com/user/{0}/profile'.format(item_value))
-            wget_args.append('http://quizilla.teennick.com/user/{0}/friends'.format(item_value))
+            wget_args.append('http://quizilla.teennick.com/user/{0}/'.format(item_value))
+            wget_args.append('http://quizilla.teennick.com/user/{0}/profile/'.format(item_value))
+            wget_args.append('http://quizilla.teennick.com/user/{0}/friends/'.format(item_value))
         
         elif item_type == 'tag':
             wget_args.append('http://quizilla.teennick.com/tags/{0}'.format(item_value))
