@@ -257,6 +257,21 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
                 end
               end
             end
+            if not (string.match(customurl, "%.jpg")
+              or string.match(customurl, "%.gif")
+              or string.match(customurl, "%.png")
+              or string.match(customurl, "%.jpeg")
+              or string.match(customurl, "%.html")
+              or string.match(customurl, "%.htm")
+              or string.match(customurl, "%.json")
+              or string.match(customurl, "%.css")) then
+              local customurlnew = customurl.."/"
+              if not string.match(customurlnew, "//") then
+                if downloaded[customurlnew] ~= true then
+                  table.insert(urls, { url=customurlnew })
+                end
+              end
+            end
           end
         end 
         for customurlnf in string.gmatch(html, '"(/[^"]+)') do
@@ -264,7 +279,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           local customurl = baseurl..customurlnf
           if string.match(customurl, item_value)
             or string.match(customurl, "/templates/")
-          or string.match(customurl, "/media/")
+            or string.match(customurl, "/media/")
             or string.match(customurl, "/data/")
             or string.match(customurl, "/nick%-assets/")
             or string.match(customurl, "cdn%.gigya%.com")
@@ -273,6 +288,21 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
             if downloaded[customurl] ~= true then
               if not string.match(customurl, "teenninck") then
                 table.insert(urls, { url=customurl })
+              end
+            end
+            if not (string.match(customurl, "%.jpg")
+              or string.match(customurl, "%.gif")
+              or string.match(customurl, "%.png")
+              or string.match(customurl, "%.jpeg")
+              or string.match(customurl, "%.html")
+              or string.match(customurl, "%.htm")
+              or string.match(customurl, "%.json")
+              or string.match(customurl, "%.css")) then
+              local customurlnew = customurl.."/"
+              if not string.match(customurlnew, "//") then
+                if downloaded[customurlnew] ~= true then
+                  table.insert(urls, { url=customurlnew })
+                end
               end
             end
           end
@@ -298,6 +328,21 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           if downloaded[fullpageurl] ~= true then
             table.insert(urls, { url=fullpageurl })
           end
+          if not (string.match(fullpageurl, "%.jpg")
+            or string.match(fullpageurl, "%.gif")
+            or string.match(fullpageurl, "%.png")
+            or string.match(fullpageurl, "%.jpeg")
+            or string.match(fullpageurl, "%.html")
+            or string.match(fullpageurl, "%.htm")
+            or string.match(fullpageurl, "%.json")
+            or string.match(fullpageurl, "%.css")) then
+            local fullpageurlnew = fullpageurl.."/"
+            if not string.match(fullpageurlnew, "//") then
+              if downloaded[fullpageurlnew] ~= true then
+                table.insert(urls, { url=fullpageurlnew })
+              end
+            end
+          end
         end
         for pageurl in string.gmatch(html, 'name="poll_title" value="([^"]+)"') do
           local urlid = string.match(url, "http[s]?://quizilla.teennick.com/[^/]+/([0-9]+)")
@@ -305,6 +350,21 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           local fullpageurl = urlbase..urlid.."/"..pageurl
           if downloaded[fullpageurl] ~= true then
             table.insert(urls, { url=fullpageurl })
+          end
+          if not (string.match(fullpageurl, "%.jpg")
+            or string.match(fullpageurl, "%.gif")
+            or string.match(fullpageurl, "%.png")
+            or string.match(fullpageurl, "%.jpeg")
+            or string.match(fullpageurl, "%.html")
+            or string.match(fullpageurl, "%.htm")
+            or string.match(fullpageurl, "%.json")
+            or string.match(fullpageurl, "%.css")) then
+            local fullpageurlnew = fullpageurl.."/"
+            if not string.match(fullpageurlnew, "//") then
+              if downloaded[fullpageurlnew] ~= true then
+                table.insert(urls, { url=fullpageurlnew })
+              end
+            end
           end
         end
         if (string.match(url, "/quizzes/") and status_code_global == 200) then
@@ -393,6 +453,21 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           if downloaded[userurl] ~= true then
             table.insert(urls, { url=userurl })
           end
+          if not (string.match(userurl, "%.jpg")
+            or string.match(userurl, "%.gif")
+            or string.match(userurl, "%.png")
+            or string.match(userurl, "%.jpeg")
+            or string.match(userurl, "%.html")
+            or string.match(userurl, "%.htm")
+            or string.match(userurl, "%.json")
+            or string.match(userurl, "%.css")) then
+            local userurlnew = userurl.."/"
+            if not string.match(userurlnew, "//") then
+              if downloaded[userurlnew] ~= true then
+                table.insert(urls, { url=userurlnew })
+              end
+            end
+          end
         end
       end
       for userurl2 in string.gmatch(html, '"(/[^"]+)') do
@@ -408,6 +483,21 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(fulluserurl2, "/static/") then
           if downloaded[fulluserurl2] ~= true then
             table.insert(urls, { url=fulluserurl2 })
+          end
+          if not (string.match(fulluserurl2, "%.jpg")
+            or string.match(fulluserurl2, "%.gif")
+            or string.match(fulluserurl2, "%.png")
+            or string.match(fulluserurl2, "%.jpeg")
+            or string.match(fulluserurl2, "%.html")
+            or string.match(fulluserurl2, "%.htm")
+            or string.match(fulluserurl2, "%.json")
+            or string.match(fulluserurl2, "%.css")) then
+            local fulluserurl2new = fulluserurl2.."/"
+            if not string.match(fulluserurl2new, "//") then
+              if downloaded[fulluserurl2new] ~= true then
+                table.insert(urls, { url=fulluserurl2new })
+              end
+            end
           end
         end
       end
