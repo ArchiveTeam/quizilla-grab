@@ -233,6 +233,7 @@ class WgetArgs(object):
         
         elif item_type == 'tag':
             wget_args.append('http://quizilla.teennick.com/tags/{0}'.format(item_value))
+            wget_args.append('http://quizilla.teennick.com/tags/{0}/'.format(item_value))
         
         if 'bind_address' in globals():
             wget_args.extend(['--bind-address', globals()['bind_address']])
